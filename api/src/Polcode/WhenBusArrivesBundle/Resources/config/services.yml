@@ -1,0 +1,7 @@
+parameters:
+#    polcode_when_bus_arrives.example.class: Polcode\WhenBusArrivesBundle\Example
+
+services:
+#    polcode_when_bus_arrives.example:
+#        class: %polcode_when_bus_arrives.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

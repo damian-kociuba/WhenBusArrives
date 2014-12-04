@@ -1,3 +1,5 @@
-app:
-    resource: @AppBundle/Controller/
-    type:     annotation
+polcode_when_bus_arrives:
+    resource: "@PolcodeWhenBusArrivesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

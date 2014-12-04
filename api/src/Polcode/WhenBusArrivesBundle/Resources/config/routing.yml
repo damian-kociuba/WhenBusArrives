@@ -1,0 +1,3 @@
+polcode_when_bus_arrives_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: PolcodeWhenBusArrivesBundle:Default:index }
