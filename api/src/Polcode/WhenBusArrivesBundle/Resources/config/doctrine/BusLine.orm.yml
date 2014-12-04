@@ -1,0 +1,22 @@
+Polcode\WhenBusArrivesBundle\Entity\BusLine:
+    type: entity
+    table: busLines
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        direction:
+            type: string
+            length: 255
+    oneToMany:
+        timetables:
+            targetEntity: Timetable
+            mappedBy: busLines
+    manyToMany:
+        busStops:
+            targetEntity: BusStop
+            mappedBy: busLines

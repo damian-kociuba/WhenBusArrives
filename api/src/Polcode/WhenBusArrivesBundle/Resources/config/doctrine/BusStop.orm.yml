@@ -1,0 +1,30 @@
+Polcode\WhenBusArrivesBundle\Entity\BusStop:
+    type: entity
+    table: busStops
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        community:
+            type: string
+            length: 255
+    oneToMany:
+        timetables:
+            targetEntity: Timetable
+            mappedBy: busStops
+    manyToMany:
+        busLines:
+            targetEntity: BusLine
+            inversesBy: busStops
+            joinTable:
+                name: busStops_busLines
+                joinColumns:
+                    busStopId: 
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    busLineId:
+                        referencedColumnName: id

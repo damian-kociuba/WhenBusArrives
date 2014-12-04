@@ -1,0 +1,29 @@
+Polcode\WhenBusArrivesBundle\Entity\Timetable:
+    type: entity
+    table: timetables
+    id:
+        id:
+          type: integer
+          generator: { strategy: AUTO }
+    fields:
+        type:
+            type: string
+            length: 255
+    oneToMany:
+        arrivals:
+            targetEntity: Arrival
+            mappedBy: timetable
+    manyToOne:
+        busLines:
+            targetEntity: BusLine
+            inversedBy: timetables
+            joinColumn:
+                name: busLineId
+                referencedColumnName: id
+        busStops:
+            targetEntity: BusStop
+            inversedBy: timetables
+            joinColumn:
+                name: busStopId
+                referencedColumnName: id
+        
