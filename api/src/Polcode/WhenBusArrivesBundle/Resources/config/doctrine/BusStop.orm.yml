@@ -9,13 +9,20 @@ Polcode\WhenBusArrivesBundle\Entity\BusStop:
         name:
             type: string
             length: 255
-        community:
+        url:
             type: string
             length: 255
     oneToMany:
         timetables:
             targetEntity: Timetable
-            mappedBy: busStops
+            mappedBy: busStop
+    manyToOne:
+        community:
+            targetEntity: Community
+            inversedBy: busStops
+            joinColumn:
+                name: communityId
+                referencedColumnName: id
     manyToMany:
         busLines:
             targetEntity: BusLine

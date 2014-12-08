@@ -12,6 +12,11 @@ class Timetable
     const WORK_DAY_TYPE = 0;
     const SATURDAY_TYPE = 1;
     const SUNDAY_TYPE = 2;
+    const SCHOOL_WORK_DAY_TYPE = 3;
+    const HOLIDAYS_WORK_DAY_TYPE = 4;
+    const FREE_DAY_TYPE = 5;
+    const NEW_YEARS_EVE = 6;
+    const EVE = 7;
     
     /**
      * @var string
@@ -32,10 +37,16 @@ class Timetable
      */
     public function setType($type)
     {
-        if($type != self::WORK_DAY_TYPE || 
-                $type != self::SATURDAY_TYPE ||
-                $type != self::SUNDAY_TYPE) {
-            throw new \InvalidArgumentException('Wrong type of timetable');
+        if($type != self::WORK_DAY_TYPE && 
+                $type != self::SATURDAY_TYPE &&
+                $type != self::SUNDAY_TYPE &&
+                $type != self::SCHOOL_WORK_DAY_TYPE &&
+                $type != self::HOLIDAYS_WORK_DAY_TYPE &&
+                $type != self::FREE_DAY_TYPE &&
+                $type != self::EVE &&
+                $type != self::NEW_YEARS_EVE
+                ) {
+            throw new \InvalidArgumentException('Wrong type of timetable: ' . $type);
         }
         
         $this->type = $type;
@@ -162,5 +173,61 @@ class Timetable
     public function getArrivals()
     {
         return $this->arrivals;
+    }
+    /**
+     * @var \Polcode\WhenBusArrivesBundle\Entity\BusLine
+     */
+    private $busLine;
+
+    /**
+     * @var \Polcode\WhenBusArrivesBundle\Entity\BusStop
+     */
+    private $busStop;
+
+
+    /**
+     * Set busLine
+     *
+     * @param \Polcode\WhenBusArrivesBundle\Entity\BusLine $busLine
+     * @return Timetable
+     */
+    public function setBusLine(\Polcode\WhenBusArrivesBundle\Entity\BusLine $busLine = null)
+    {
+        $this->busLine = $busLine;
+
+        return $this;
+    }
+
+    /**
+     * Get busLine
+     *
+     * @return \Polcode\WhenBusArrivesBundle\Entity\BusLine 
+     */
+    public function getBusLine()
+    {
+        return $this->busLine;
+    }
+
+    /**
+     * Set busStop
+     *
+     * @param \Polcode\WhenBusArrivesBundle\Entity\BusStop $busStop
+     * @return Timetable
+     */
+    public function setBusStop(\Polcode\WhenBusArrivesBundle\Entity\BusStop $busStop = null)
+    {
+        $this->busStop = $busStop;
+
+        return $this;
+    }
+
+    /**
+     * Get busStop
+     *
+     * @return \Polcode\WhenBusArrivesBundle\Entity\BusStop 
+     */
+    public function getBusStop()
+    {
+        return $this->busStop;
     }
 }

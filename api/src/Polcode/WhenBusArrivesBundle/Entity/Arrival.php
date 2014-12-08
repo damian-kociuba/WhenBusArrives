@@ -108,4 +108,32 @@ class Arrival
     {
         return $this->timetable;
     }
+    /**
+     * @var \DateTime
+     */
+    private $time;
+
+
+    /**
+     * Set time
+     *
+     * @param \DateTime $time
+     * @return Arrival
+     */
+    public function setTime($time)
+    {
+        $this->time = $time;
+
+        return $this;
+    }
+
+    /**
+     * Get time
+     *
+     * @return \DateTime 
+     */
+    public function getTime()
+    {
+        return $this->time;
+    }
 }

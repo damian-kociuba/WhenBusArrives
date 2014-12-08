@@ -14,13 +14,13 @@ Polcode\WhenBusArrivesBundle\Entity\Timetable:
             targetEntity: Arrival
             mappedBy: timetable
     manyToOne:
-        busLines:
+        busLine:
             targetEntity: BusLine
             inversedBy: timetables
             joinColumn:
                 name: busLineId
                 referencedColumnName: id
-        busStops:
+        busStop:
             targetEntity: BusStop
             inversedBy: timetables
             joinColumn:

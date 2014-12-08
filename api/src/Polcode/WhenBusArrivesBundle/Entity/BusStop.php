@@ -163,4 +163,32 @@ class BusStop
     {
         return $this->busLines;
     }
+    /**
+     * @var string
+     */
+    private $url;
+
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return BusStop
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }

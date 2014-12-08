@@ -1,6 +1,6 @@
-Polcode\WhenBusArrivesBundle\Entity\BusLine:
+Polcode\WhenBusArrivesBundle\Entity\Community:
     type: entity
-    table: busLines
+    table: comminities
     id:
         id:
             type: integer
@@ -9,14 +9,11 @@ Polcode\WhenBusArrivesBundle\Entity\BusLine:
         name:
             type: string
             length: 255
-        direction:
+        url:
             type: string
             length: 255
     oneToMany:
-        timetables:
-            targetEntity: Timetable
-            mappedBy: busLine
-    manyToMany:
         busStops:
             targetEntity: BusStop
-            mappedBy: busLines
+            mappedBy: community
+    

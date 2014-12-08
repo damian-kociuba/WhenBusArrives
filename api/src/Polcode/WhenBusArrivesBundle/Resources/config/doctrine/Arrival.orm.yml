@@ -6,7 +6,7 @@ Polcode\WhenBusArrivesBundle\Entity\Arrival:
           type: integer
           generator: { strategy: AUTO }
     fields:
-        hour:
+        time:
             type: time
     manyToOne:
         timetable:
