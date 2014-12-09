@@ -27,7 +27,7 @@ class KzkgopTimeTableLoaderTest extends WebTestCase {
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUpToDo() {
+    protected function setUp() {
         $this->object = new TimeTableLoader();
 
         static::$kernel = static::createKernel();
@@ -70,13 +70,12 @@ class KzkgopTimeTableLoaderTest extends WebTestCase {
         $this->em = static::$kernel->getContainer()
                 ->get('doctrine')
                 ->getManager();
+   
     }
 
-    /**
-     * @ignore
-     */
     public function testLoadToDatabase() {
-
+        var_dump('kokokok');
+        $this->object->loadToDatabase($this->em);
     }
 
 }

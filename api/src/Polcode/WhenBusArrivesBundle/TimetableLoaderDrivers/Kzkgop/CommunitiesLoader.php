@@ -22,7 +22,7 @@ class CommunitiesLoader {
         $crawler->filter('table.tabelka_gmin tr td:first-child a')->each(function ($node) use (&$communities) {
             $community = new Community();
             $community->setName($node->text());
-            $community->setUrl($node->attr('href'));
+            $community->setUrl('http://rozklady.kzkgop.pl/'.$node->attr('href'));
             $communities[] = $community;
         });
         

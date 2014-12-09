@@ -24,7 +24,9 @@ class BusStopsLoaderTest extends \PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $this->object = new BusStopsLoader;
-        $this->busStops = $this->object->loadAndGetBusStops('http://rozklady.kzkgop.pl/index.php?co=rozklady&submenu=przystanki&gmina=2');
+        $community = new \Polcode\WhenBusArrivesBundle\Entity\Community();
+        $community->setUrl('http://rozklady.kzkgop.pl/index.php?co=rozklady&submenu=przystanki&gmina=2');
+        $this->busStops = $this->object->loadAndGetBusStops($community);
     }
 
     public function testIfBusStopListIsArray() {

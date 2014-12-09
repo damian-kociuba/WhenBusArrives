@@ -15,9 +15,35 @@ class Timetable
     const SCHOOL_WORK_DAY_TYPE = 3;
     const HOLIDAYS_WORK_DAY_TYPE = 4;
     const FREE_DAY_TYPE = 5;
-    const NEW_YEARS_EVE = 6;
-    const EVE = 7;
-    
+    const NEW_YEARS_EVE_TYPE = 6;
+    const EVE_TYPE = 7;
+    const ALL_SAINTS_DAY_TYPE = 8;
+    const SUNDAY_AND_HOLY_DAYS_TYPE = 9;
+    const SCHOOL_WORK_DAY_WITH_WINDER_HOLIDAYS_DAY_TYPE = 10;
+    const WORK_DAY_IN_SUMMER_HOLIDAYS_TYPE = 11;
+    const DECEMBER_25_AND_EASTER_SUNDAY_TYPE = 12;
+    const CHRISTMAS_DWO_DAYS_AND_NEW_YEAR_DAY_AND_EASTER_TWO_DAYS_TYPE = 13;
+    const DECEMBER_25_AND_EASTER_SUNDAY_AND_NEW_YEAR_TYPE = 14;
+    const FREE_DAYS_IN_SHOPPING_CENTERS_TYPE = 15;
+    const SUNDAYS_AND_HOLY_DAYS_WITHOUT_FREE_DAYS_IN_SHOPPING_CENTERS_TYPE = 16;
+    const FREE_DAYS_WITHOUT_FREE_DAYS_IN_SHOPPING_CENTERS_TYPE = 17;
+    const EVERY_DAY_TYPE = 18;
+    const SATURDAYS_EXCEPT_SUMMER_HOLIDAYS_TYPE = 19;
+    const SATURDAYS_IN_SUMMER_HOLIDAYS_TYPE = 20;
+    const SUNDAY_AND_HOLY_DAYS_EXCEPT_SUMMER_HOLIDAYS_TYPE = 21;
+    const SUNDAY_AND_HOLY_DAYS_IN_SUMMER_HOLIDAYS_TYPE = 22;
+    const SUNDAY_SPECIAL_TYPE = 23;
+    const TIME_CHANGE_DAY_TYPE = 24;
+    const NIGHT_BETWEEN_FRIDAY_AND_SATURDAY_TYPE = 25;
+    const NIGHT_BETWEEN_SATURDAY_AND_SUNDAY_OR_SUNDAY_MONDAY_TYPE = 26;
+    const SUNDAYS_IN_SUMMER_HOLIDAYS_TYPE = 27;
+    const NIGHT_BETWEEN_SATURDAY_AND_SUNDAY_TYPE = 28;
+    const MONDAY_TYPE = 29;
+    const TUESDAY_TYPE = 30;
+    const WEDNESDAY_TYPE = 31;
+    const THURSDAY_TYPE = 32;
+    const FRIDAY_TYPE = 33;
+
     /**
      * @var string
      */
@@ -43,8 +69,34 @@ class Timetable
                 $type != self::SCHOOL_WORK_DAY_TYPE &&
                 $type != self::HOLIDAYS_WORK_DAY_TYPE &&
                 $type != self::FREE_DAY_TYPE &&
-                $type != self::EVE &&
-                $type != self::NEW_YEARS_EVE
+                $type != self::EVE_TYPE &&
+                $type != self::NEW_YEARS_EVE_TYPE &&
+                $type != self::ALL_SAINTS_DAY_TYPE &&
+                $type != self::SUNDAY_AND_HOLY_DAYS_TYPE &&
+                $type != self::SCHOOL_WORK_DAY_WITH_WINDER_HOLIDAYS_DAY_TYPE &&
+                $type != self::WORK_DAY_IN_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::DECEMBER_25_AND_EASTER_SUNDAY_TYPE &&
+                $type != self::CHRISTMAS_DWO_DAYS_AND_NEW_YEAR_DAY_AND_EASTER_TWO_DAYS_TYPE &&
+                $type != self::DECEMBER_25_AND_EASTER_SUNDAY_AND_NEW_YEAR_TYPE &&
+                $type != self::FREE_DAYS_IN_SHOPPING_CENTERS_TYPE &&
+                $type != self::SUNDAYS_AND_HOLY_DAYS_WITHOUT_FREE_DAYS_IN_SHOPPING_CENTERS_TYPE &&
+                $type != self::FREE_DAYS_WITHOUT_FREE_DAYS_IN_SHOPPING_CENTERS_TYPE &&
+                $type != self::EVERY_DAY_TYPE &&
+                $type != self::SATURDAYS_EXCEPT_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::SATURDAYS_IN_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::SUNDAY_AND_HOLY_DAYS_EXCEPT_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::SUNDAY_AND_HOLY_DAYS_IN_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::SUNDAY_SPECIAL_TYPE &&
+                $type != self::TIME_CHANGE_DAY_TYPE &&
+                $type != self::NIGHT_BETWEEN_FRIDAY_AND_SATURDAY_TYPE &&
+                $type != self::NIGHT_BETWEEN_SATURDAY_AND_SUNDAY_OR_SUNDAY_MONDAY_TYPE &&
+                $type != self::SUNDAYS_IN_SUMMER_HOLIDAYS_TYPE &&
+                $type != self::NIGHT_BETWEEN_SATURDAY_AND_SUNDAY_TYPE &&
+                $type != self::MONDAY_TYPE &&
+                $type != self::TUESDAY_TYPE &&
+                $type != self::WEDNESDAY_TYPE &&
+                $type != self::THURSDAY_TYPE &&
+                $type != self::FRIDAY_TYPE 
                 ) {
             throw new \InvalidArgumentException('Wrong type of timetable: ' . $type);
         }

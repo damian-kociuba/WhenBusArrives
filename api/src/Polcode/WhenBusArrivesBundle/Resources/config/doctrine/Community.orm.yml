@@ -1,6 +1,6 @@
 Polcode\WhenBusArrivesBundle\Entity\Community:
     type: entity
-    table: comminities
+    table: communities
     id:
         id:
             type: integer

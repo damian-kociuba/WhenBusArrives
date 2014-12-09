@@ -7,6 +7,7 @@ use Polcode\WhenBusArrivesBundle\Entity\BusLine;
 use Polcode\WhenBusArrivesBundle\Entity\Timetable;
 use Polcode\WhenBusArrivesBundle\Entity\Arrival;
 use Polcode\WhenBusArrivesBundle\TimetableLoaderDrivers\Kzkgop\TranslateToTimetableType;
+use Polcode\WhenBusArrivesBundle\Repository\BusLineRepository;
 use Goutte\Client;
 
 /**
@@ -26,7 +27,11 @@ class BusLiniesLoader {
         $client = new Client();
         $crawler = $client->request('GET', $busStop->getUrl());
 
-        $form = $crawler->selectButton('pokaż rozkłady wybranych linii')->form();
+        $submitButton = $crawler->selectButton('pokaż rozkłady wybranych linii');
+        if($submitButton->count() != 1) {
+            throw new \RuntimeException('Loading bus lines error. BusStop name: '.$busStop->getName());
+        }
+        $form = $submitButton->form();
         //var_dump($form->html());
         $timetableCrawler = $client->submit($form);
 
@@ -39,18 +44,26 @@ class BusLiniesLoader {
 
         $amountOfLines = $headers->count();
 
+        $busLineRepository = BusLineRepository::getInstance();
+        
         $busLinesToReturn = array();
 
         for ($i = 0; $i < $amountOfLines; $i++) {
             $lineName = $headers->eq($i)->filter('a#nr_lini_rozklad')->text();
+            
             $lineDirectionDirty = $headers->eq($i)->filter('h3')->text();
             preg_match('/^Kierunek: (.*)/D', $lineDirectionDirty, $matches);
             $lineDirection = $matches[1];
+            
+            //when last bus then Stop direction is empty.
+            if(empty($lineDirection)) {
+                $lineDirection = $busStop->getName();
+            }
 
-            $busLine = new BusLine();
-            $busLine->setName($lineName);
-            $busLine->setDirection($lineDirection);
+            $busLine = $busLineRepository->findInOtherSectionsOrCreateCurrentSection($lineName, $lineDirection) ;// ($lineName, $lineDirection);
 
+            $busLine->addBusStop($busStop);
+            $busStop->addBusLine($busLine);
 
             $timetableKinds = $contents->eq($i)->filter('th');
             $arrivalsDom = $contents->eq($i)->filter('td');
@@ -66,9 +79,10 @@ class BusLiniesLoader {
                     $hours = $node->filter('b')->text();
                     $minutes = $node->filterXPath('//sup/text()')->text();
                     $time = $hours . ':' . $minutes;
-                    
+
                     $arrival = new Arrival();
-                    $arrival->setTime($time);
+                    $arrival->setTime(new \DateTime($time));
+                    $arrival->setTimetable($timetable);
                     $timetable->addArrival($arrival);
                 });
                 $busLine->addTimetable($timetable);
