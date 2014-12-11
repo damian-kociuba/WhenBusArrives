@@ -1,0 +1,9 @@
+<div ng-controller="ArrivalsFromBusStopCtrl" class="arrivals-container">
+    <h3>Najbliższe odjazdy - godzina {{getCurrentTime() | date:'shortTime'}}</h3>
+    <ul>
+        <li ng-repeat="oneArrival in arrivals">
+            Linia: {{oneArrival.line}} | Kierunek: {{oneArrival.direction}} | Odjazd za: <b><timer-to-date death-line="oneArrival.time"></timer-to-date>min</b>
+        </li>
+    </ul>
+</div>
+
