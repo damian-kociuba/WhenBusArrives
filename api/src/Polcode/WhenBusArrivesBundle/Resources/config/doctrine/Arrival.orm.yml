@@ -1,5 +1,6 @@
 Polcode\WhenBusArrivesBundle\Entity\Arrival:
     type: entity
+    repositoryClass: Polcode\WhenBusArrivesBundle\Repository\ArrivalRepository
     table: arrivals
     id:
         id:

@@ -1,3 +1,21 @@
 polcode_when_bus_arrives_homepage:
     path:     /hello/{name}
     defaults: { _controller: PolcodeWhenBusArrivesBundle:Default:index }
+
+Polcode_WhenBusArrives_BusStopList:
+    path: /bus_stop/all.{_format}
+    defaults: { _controller: PolcodeWhenBusArrivesBundle:BusStop:getAll }
+    requirements:
+        _format: json
+        
+Polcode_WhenBusArrives_ArrivalsListByBusStop:
+    path: /arrivals/{busStopId}/all.{_format}
+    defaults: { _controller: PolcodeWhenBusArrivesBundle:Arrival:getAll }
+    requirements:
+        _format: json
+        
+Polcode_WhenBusArrives_NearestArrivalsListByBusStop:
+    path: /arrivals/{busStopId}/nearest.{_format}
+    defaults: { _controller: PolcodeWhenBusArrivesBundle:Arrival:getNearest }
+    requirements:
+        _format: json

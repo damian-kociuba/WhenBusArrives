@@ -74,8 +74,8 @@ class KzkgopTimeTableLoaderTest extends WebTestCase {
     }
 
     public function testLoadToDatabase() {
-        var_dump('kokokok');
-        $this->object->loadToDatabase($this->em);
+        //var_dump('kokokok');
+        //$this->object->loadToDatabase($this->em);
     }
 
 }

@@ -15,15 +15,15 @@ use Polcode\WhenBusArrivesBundle\TimetableLoaderDrivers\Kzkgop\BusLiniesLoader;
 class TimeTableLoader implements ITimetableLoader {
 
     private $changeProgressCallable = null;
-
     private $logger;
-    
-    public function __construct($changeProgress, $logger) {
+
+    public function __construct($changeProgress = null, $logger = null) {
         //if (is_callable($changeProgress)) {
         $this->changeProgressCallable = $changeProgress;
         //}
-        $this->changeProgressCallable->__invoke(0);
-        
+        if ($this->changeProgressCallable != null) {
+            $this->changeProgressCallable->__invoke(0);
+        }
         $this->logger = $logger;
     }
 
@@ -52,6 +52,8 @@ class TimeTableLoader implements ITimetableLoader {
                     try {
                         $lines = $busLineLoader->loadAndGetLinesWithArrivals($oneBusStop);
                     } catch (\RuntimeException $ex) {
+                        if ($this->logger == null)
+                            throw $ex;
                         $this->logger->error($ex->getMessage());
                         $lines = array();
                     }
@@ -65,7 +67,7 @@ class TimeTableLoader implements ITimetableLoader {
                 }
                 $em->flush();
                 $em->clear();
-            } catch(Exception $ex) {
+            } catch (Exception $ex) {
                 $this->logger->error($ex->getMessage());
             }
         }

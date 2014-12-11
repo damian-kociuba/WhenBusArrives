@@ -1,0 +1,4 @@
+[{% for busStop in busStopList %}
+{"id": {{busStop.id|json_encode()}}, "name": {{busStop.name|json_encode()|raw}}}{% if loop.last == false %},{%endif%}
+
+{% endfor %}]

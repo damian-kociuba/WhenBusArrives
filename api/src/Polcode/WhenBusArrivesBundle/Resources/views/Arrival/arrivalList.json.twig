@@ -1,0 +1,4 @@
+[{% for arrival in arrivalList %}
+{"id": {{arrival.id|json_encode()}}, "time": "{{arrival.time|date('H:i')}}", "line": {{arrival.getTimetable().getBusLine().getName()|json_encode()|raw}},"direction": {{arrival.getTimetable().getBusLine().getDirection()|json_encode|raw}}}{% if loop.last == false %},{%endif%}
+
+{% endfor %}]

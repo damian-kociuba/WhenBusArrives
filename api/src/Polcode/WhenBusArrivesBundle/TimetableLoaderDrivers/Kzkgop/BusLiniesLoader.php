@@ -77,13 +77,19 @@ class BusLiniesLoader {
 
                 $arrivalsDom->eq($j)->filter('span#blok_godzina')->each(function($node) use(&$timetable) {
                     $hours = $node->filter('b')->text();
-                    $minutes = $node->filterXPath('//sup/text()')->text();
-                    $time = $hours . ':' . $minutes;
+                    $minutesList = array();
+                    $minutes = $node->filterXPath('//sup/text()')->each(function($node_minutes) use (&$minutesList){
+                        $minutesList[] = $node_minutes->text(); 
+                    });
+                    
+                    foreach($minutesList as $minutes) {
+                        $time = $hours . ':' . $minutes;
 
-                    $arrival = new Arrival();
-                    $arrival->setTime(new \DateTime($time));
-                    $arrival->setTimetable($timetable);
-                    $timetable->addArrival($arrival);
+                        $arrival = new Arrival();
+                        $arrival->setTime(new \DateTime($time));
+                        $arrival->setTimetable($timetable);
+                        $timetable->addArrival($arrival);
+                    }
                 });
                 $busLine->addTimetable($timetable);
             }

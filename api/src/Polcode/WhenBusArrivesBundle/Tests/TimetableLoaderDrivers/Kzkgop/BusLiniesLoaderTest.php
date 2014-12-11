@@ -29,8 +29,8 @@ class BusLiniesLoaderTest extends \PHPUnit_Framework_TestCase {
         $this->object = new BusLiniesLoader;
 
         $busStop = new \Polcode\WhenBusArrivesBundle\Entity\BusStop();
-        $busStop->setName('Bieruń Dom Kultury'); //it isn't important
-        $busStop->setUrl('http://rozklady.kzkgop.pl/index.php?co=linie_przystanku&id_przystanku=2345');
+        $busStop->setName('Radockiego'); //it isn't important
+        $busStop->setUrl('http://rozklady.kzkgop.pl/index.php?co=linie_przystanku&id_przystanku=292');
 
 
         $this->busLines = $this->object->loadAndGetLinesWithArrivals($busStop);
@@ -42,10 +42,10 @@ class BusLiniesLoaderTest extends \PHPUnit_Framework_TestCase {
 
     public function testIfBusLineListConsistBusLines() {
         $searchedLines = array(
-            array('name' => '931', 'direction' => 'Zawodzie Pętla'),
-            array('name' => '931', 'direction' => 'Bieruń Plac Nobla'),
-            array('name' => '995', 'direction' => 'Mysłowice Towarowa'),
-            array('name' => '995', 'direction' => 'Lędziny Kopalnia Ziemowit')
+            array('name' => '297N', 'direction' => 'Katowice Dworzec'),
+            array('name' => '297', 'direction' => 'Katowice Dworzec'),
+            array('name' => '11', 'direction' => 'Piotrowice Pętla'),
+            array('name' => '138', 'direction' => 'Ochojec Szpital')
         );
         $found = array_fill(0, count($searchedLines), false);
 
@@ -78,7 +78,7 @@ class BusLiniesLoaderTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testIfBusLineListConsistTimetables() {
-        $index = $this->getIndexOfBusLine(array('name' => '931', 'direction' => 'Zawodzie Pętla'));
+        $index = $this->getIndexOfBusLine(array('name' => '297', 'direction' => 'Katowice Dworzec'));
         $concreteBusLine = $this->busLines[$index];
         
         $timetables = $concreteBusLine->getTimetables();
@@ -90,7 +90,7 @@ class BusLiniesLoaderTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testIfBusLineListConsistArrivals() {
-        $index = $this->getIndexOfBusLine(array('name' => '931', 'direction' => 'Zawodzie Pętla'));
+        $index = $this->getIndexOfBusLine(array('name' => '297', 'direction' => 'Katowice Dworzec'));
         $concreteBusLine = $this->busLines[$index];
         
         $timetables = $concreteBusLine->getTimetables();
@@ -98,7 +98,7 @@ class BusLiniesLoaderTest extends \PHPUnit_Framework_TestCase {
         
         $arrivals = $timetable->getArrivals();
         foreach($arrivals as $oneArrival) {
-            $this->assertRegExp('/^[0-9]{1,2}:[0-9]{2}$/', $oneArrival->getTime());
+            $this->assertTrue($oneArrival->getTime() instanceof \DateTime, 'Arrival tame should be instance of DataTime');
         }
         
     }
